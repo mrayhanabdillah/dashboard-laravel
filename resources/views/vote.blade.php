@@ -43,7 +43,7 @@
             </div>
         </div>
         <div id="peserta" class="p-5 text-light shadow-lg" style="background-color: #DA70D6">
-            <h3 class="fw-bold text-light text-center mb-3">Peserta Mister Young Indonesia 2023</h3>
+            <h3 class="fw-bold text-light text-center mb-3">Peserta {{ $program->name }}</h3>
             <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
                 @foreach ($program->participants as $participant)
                     <div class="col">
@@ -73,7 +73,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
-                                <form action="{{route('store-voting')}}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('store-voting') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="modal-body">
                                         <div class="form-floating mb-3">
@@ -121,7 +121,8 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="formFile" class="form-label">Upload Bukti Pembayaran</label>
-                                            <input class="form-control" name="proof_payment" type="file" id="formFile">
+                                            <input class="form-control" name="proof_payment" type="file"
+                                                id="formFile">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -136,22 +137,90 @@
                 @endforeach
             </div>
         </div>
-        <div id="tiket" class="bg-gradient-secondary px-lg-8 px-3 py-3 text-center">
-            <h1 class="text-center fw-bold text-light">Tiket Acara Ning Ayu 2024</h1>
-            <p class="text-justify text-light fw-bold">Malam Penganugrahan Ning Ayu 2024 akan diadakan pada June 21, 2024,
-                yang
-                bertempatkan di Ballroom Sunset 100.
-                Pastikan anda menjadi saksi sejarah lahirnya putra-putri kebanggaan Indonesia. Tiket sudah bisa dibeli
-                melalui
-                link di bawah ini.</p>
-            <button type="button" class="btn bg-gradient-info">Beli Tiket</button>
-            <p class="text-light fw-bold">Sudah membeli tiket acara Ning Ayu 2024? Silahkan cek tiket anda di bawah ini :
-            </p>
-            <button type="button" class="btn bg-gradient-info">Cek Tiket</button>
+        <div id="tiket" class="bg-gradient-secondary px-lg-8 px-3 py-3">
+            <div class="text-center">
+                <h1 class="fw-bold text-light">Tiket Acara {{ $program->name }}</h1>
+
+                <p class="text-justify text-light fw-bold">Malam Penganugrahan {{ $program->name }} akan diadakan pada
+                    {{ Carbon\Carbon::parse($program->date_program)->locale('id')->isoFormat('D MMMM Y') }},
+                    yang
+                    bertempatkan di {{$program->location}}.
+                    Pastikan anda menjadi saksi sejarah lahirnya putra-putri kebanggaan Indonesia. Tiket sudah bisa dibeli
+                    melalui
+                    link di bawah ini.</p>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#buy-ticket"
+                    class="btn bg-gradient-info">Beli
+                    Tiket</button>
+
+                <p class="text-light fw-bold">Sudah membeli tiket acara {{ $program->name }}? Silahkan cek tiket anda di
+                    bawah ini
+                    :
+                </p>
+                <button type="button" class="btn bg-gradient-info">Cek Tiket</button>
+            </div>
+
+            <div class="modal fade" id="buy-ticket" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Form Tiket {{ $program->name }}
+                            </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('tickets-buy', $program->id) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="floatingInput"
+                                        placeholder="name@example.com" name="name">
+                                    <label for="floatingInput">Nama Lengkap</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" id="floatingInput"
+                                        placeholder="name@example.com" name="email">
+                                    <label for="floatingInput">Email</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" id="floatingInput"
+                                        placeholder="name@example.com" name="phone">
+                                    <label for="floatingInput">Nomor Handphone</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" id="floatingSelect"
+                                        aria-label="Floating label select example" name="ticket_id">
+                                        <option hidden selected>Open this select menu</option>
+                                        @foreach ($tickets as $option)
+                                            <option value="{{ $option->id }}">{{ $option->name }} -
+                                                {{ $option->amount }}
+                                                @if ($option->bonus != 0)
+                                                    + {{ $option->bonus }}
+                                                @endif Point
+                                                | @rupiah($option->price)
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <label for="floatingSelect">Paket Tiket</label>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Upload Bukti Pembayaran</label>
+                                    <input class="form-control" name="proof_payments" type="file" id="formFile">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-info">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="kontak" class="container mt-5 px-lg-12">
             <h3 class="text-center">Hubungi Kami</h3>
-            <form >
+            <form>
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="floatingInput" placeholder="Nama Lengkap">
                     <label for="floatingInput">Nama Lengkap</label>

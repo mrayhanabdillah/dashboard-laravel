@@ -5,14 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-
-class Ticket extends Model
+class Guest extends Model
 {
     protected $fillable = [
-        'name',
-        'price',
-        'amount',
-        'bonus',
+        'payment_id',
+        'username',
+        'password',
     ];
 
     protected $keyType = 'string';
@@ -26,9 +24,8 @@ class Ticket extends Model
         });
     }
 
-    public function payments()
+    public function payment()
     {
-        return $this->hasMany(PaymentTicket::class,'ticket_id');
+        return $this->hasOne(PaymentTicket::class,'payment_id');
     }
-    
 }

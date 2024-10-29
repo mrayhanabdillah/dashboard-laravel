@@ -32,7 +32,7 @@ class ParticipantController extends Controller
             'dob' => 'required',
             'origin' => 'required',
             'description' => 'required',
-            'photo' => 'required',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($request->hasFile('photo')) {

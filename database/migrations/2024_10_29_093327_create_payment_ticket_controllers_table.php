@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('participants', function (Blueprint $table) {
+        Schema::create('payment_tickets', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('name');
+            $table->string('email');
+            $table->string('phone');
+            $table->uuid('ticket_id'); // UUID dari program
+            $table->foreign('ticket_id')->references('id')->on('tickets')->onDelete('cascade');
             $table->uuid('program_id'); // UUID dari program
             $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
-            $table->string('name');
-            $table->string('photo');
-            $table->string('origin');
-            $table->date('dob');
-            $table->string('pob');
-            $table->text('description');
-            $table->integer('votes')->default(0);
+            $table->string('proof_payments');
+            $table->boolean('state')->default(false);
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('participants');
+        Schema::dropIfExists('payment_tickets');
     }
 };

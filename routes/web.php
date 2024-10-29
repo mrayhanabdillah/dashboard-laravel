@@ -90,6 +90,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('tickets', [TicketController::class, 'index'])->name('tickets');
     Route::get('tickets/create', [TicketController::class, 'create'])->name('tickets-create');
     Route::post('tickets/store', [TicketController::class, 'store'])->name('tickets-store');
+    Route::post('tickets-buy/{id}', [TicketController::class, 'buy'])->name('tickets-buy');
+    Route::get('validasi/ticket', [TicketController::class, 'newPayment'])->name('new-tiket');
+    Route::get('valid/ticket', [TicketController::class, 'validPayment'])->name('valid-tiket');
+    Route::get('detail-ticket/{id}', [TicketController::class, 'detailTiketBaru'])->name('detail-tiket');
+    Route::get('valid-payment/{id}', [TicketController::class, 'validatePayment'])->name('valid-payment');
+    Route::get('delete-payment/{id}', [TicketController::class, 'destroy'])->name('delete-payment');
 
 
 

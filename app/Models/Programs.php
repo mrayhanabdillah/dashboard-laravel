@@ -39,4 +39,9 @@ class Programs extends Model
     {
         return $this->hasMany(Voting::class,'program_id');
     }
+    public function payments()
+    {
+        return $this->hasMany(PaymentTicket::class,'program_id');
+    }
+
 }

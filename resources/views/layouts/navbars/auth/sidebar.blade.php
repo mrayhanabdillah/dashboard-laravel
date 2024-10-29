@@ -53,6 +53,18 @@
                     <span class="nav-link-text ms-1">Tiket Acara</span>
                 </a>
             </li>
+            <li class="nav-item pb-2">
+                <a class="nav-link {{ Request::is('validasi/ticket') ? 'active' : '' }}"
+                    href="{{ route('new-tiket') }}">
+                    <span class="nav-link-text ms-1">Tiket Baru</span>
+                </a>
+            </li>
+            <li class="nav-item pb-2">
+                <a class="nav-link {{ Request::is('valid/ticket') ? 'active' : '' }}"
+                    href="{{ route('valid-tiket') }}">
+                    <span class="nav-link-text ms-1">Tiket Tervalidasi</span>
+                </a>
+            </li>
             <li class="nav-item mt-2">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pengaturan</h6>
             </li>

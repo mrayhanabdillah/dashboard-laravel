@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('votings', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('program_id'); // UUID dari program
-            $table->foreign('program_id')->references('id')->on('programs')->onDelete('restrict');
+            $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
             $table->uuid('participant_id'); // UUID dari program
-            $table->foreign('participant_id')->references('id')->on('participants')->onDelete('restrict');
+            $table->foreign('participant_id')->references('id')->on('participants')->onDelete('cascade');
             $table->uuid('voteType_id'); // UUID dari program
-            $table->foreign('voteType_id')->references('id')->on('vote_types')->onDelete('restrict');
+            $table->foreign('voteType_id')->references('id')->on('vote_types')->onDelete('cascade');
             $table->string('name');
             $table->string('email');
             $table->string('phone');

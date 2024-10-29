@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('carousel_images', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('config_id'); // UUID dari program
-            $table->foreign('config_id')->references('id')->on('configs')->onDelete('restrict');
+            $table->foreign('config_id')->references('id')->on('configs')->onDelete('cascade');
             $table->string('filename');
             $table->timestamps();
         });

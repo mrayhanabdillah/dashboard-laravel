@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 
-class Ticket extends Model
+class PaymentTicket extends Model
 {
     protected $fillable = [
         'name',
-        'price',
-        'amount',
-        'bonus',
+        'email',
+        'phone',
+        'ticket_id',
+        'program_id',
+        'proof_payments',
     ];
 
     protected $keyType = 'string';
@@ -26,9 +28,18 @@ class Ticket extends Model
         });
     }
 
-    public function payments()
+    public function tickets()
     {
-        return $this->hasMany(PaymentTicket::class,'ticket_id');
+        return $this->belongsTo(Ticket::class,'ticket_id');
     }
-    
+    public function program()
+    {
+        return $this->belongsTo(Programs::class,'program_id');
+    }
+
+    public function guest()
+    {
+        return $this->hasOne(Guest::class,'payment_id');
+    }
+
 }

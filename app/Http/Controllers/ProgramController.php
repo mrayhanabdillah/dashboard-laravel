@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Programs;
 use App\Models\VoteType;
 use App\Models\Voting;
+use App\Models\Ticket;
 use Illuminate\Validation\ValidationException;
 use DataTables;
 Use Alert;
@@ -15,8 +16,8 @@ class ProgramController extends Controller
     public function programIndex($id){
         $program = Programs::find($id);
         $voteTypes = VoteType::where('is_active',1)->get();
-
-        return view('vote',compact('program','voteTypes'));
+        $tickets = Ticket::all();
+        return view('vote',compact('program','voteTypes','tickets'));
     }
 
     public function index(Request $request){

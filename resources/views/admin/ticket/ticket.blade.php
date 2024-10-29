@@ -25,23 +25,23 @@
                                             No
                                         </th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             Nama Paket Tiket
                                         </th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             Harga Paket
                                         </th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             Jumlah Tiket
                                         </th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             Bonus Tiket
                                         </th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             action
                                         </th>
                                     </tr>
@@ -52,19 +52,19 @@
                                             <td class="ps-4 text-start">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $index + 1 }}</p>
                                             </td>
-                                            <td>
+                                            <td class="text-start">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $ticket->name }}</p>
                                             </td>
-                                            <td>
+                                            <td class="text-start">
                                                 <p class="text-xs font-weight-bold mb-0">@rupiah($ticket->price)</p>
                                             </td>
-                                            <td>
+                                            <td class="text-start">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $ticket->amount }}</p>
                                             </td>
-                                            <td>
+                                            <td class="text-start">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $ticket->bonus }}</p>
                                             </td>
-                                            <td>
+                                            <td class="text-start">
                                                 <a href="{{ route('delete-program', $ticket->id) }}" class="me-3">
                                                     <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                                 </a>

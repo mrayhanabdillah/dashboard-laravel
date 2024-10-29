@@ -8,11 +8,11 @@
                     <div class="card-header pb-0">
                         <div class="d-flex flex-row justify-content-between">
                             <div>
-                                <h5 class="mb-0">All Programs</h5>
+                                <h5 class="mb-0">Program</h5>
                             </div>
                             <a href="{{ route('create-program') }}" class="btn bg-gradient-info btn-sm mb-0"
-                                type="button">+&nbsp; New
-                                Program</a>
+                                type="button">+&nbsp;
+                                Program Baru</a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -85,8 +85,8 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="{{route('dashboard-program',$program->id)}}" class="me-3" data-bs-toggle="tooltip"
-                                                    data-bs-original-title="Lihat Dashboard">
+                                                <a href="{{ route('dashboard-program', $program->id) }}" class="me-3"
+                                                    data-bs-toggle="tooltip" data-bs-original-title="Lihat Dashboard">
                                                     <i class="bi bi-arrow-up-right-square-fill text-secondary"></i>
                                                 </a>
                                                 <a href="{{ route('delete-program', $program->id) }}" class="me-3">
